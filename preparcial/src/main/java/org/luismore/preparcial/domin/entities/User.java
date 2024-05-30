@@ -21,14 +21,18 @@ import java.util.UUID;
 
 public class User implements UserDetails{
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String username;
     private String email;
     private String password;
 
-    @Column(insertable = false)
-    @ColumnDefault(value = "true")
+    @Column(name = "active",insertable = false)
     private Boolean active;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Token> tokens;
 
     @OneToMany(mappedBy = "creator", fetch = FetchType.LAZY)
     private List<Course> created_courses;
@@ -58,11 +62,6 @@ public class User implements UserDetails{
     }
 
     @Override
-    public String getUsername() {
-        return "";
-    }
-
-    @Override
     public boolean isAccountNonExpired() {
         return false;
     }
@@ -79,7 +78,7 @@ public class User implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return this.active;
     }
 
 }

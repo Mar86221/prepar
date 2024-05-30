@@ -13,19 +13,18 @@ public class GeneralResponse {
     private String message;
     private Object data;
 
-    public static ResponseEntity<GeneralResponse> getResponse(HttpStatus status, String message, Object data){
+    public static ResponseEntity<GeneralResponse> getResponse(HttpStatus status, String message, Object data) {
         return new ResponseEntity<>(
                 new GeneralResponse(message, data),
                 status
         );
     }
-
-    public static ResponseEntity<GeneralResponse> getResponse(HttpStatus status, String message){
+    public static ResponseEntity<GeneralResponse> getResponse(HttpStatus status, String message) {
         return getResponse(status, message, null);
     }
 
-    public static ResponseEntity<GeneralResponse> getRespones(HttpStatus status, Object data){
+    public static ResponseEntity<GeneralResponse> getResponse(HttpStatus status, Object data) {
         return getResponse(status, status.getReasonPhrase(), data);
     }
-
 }
+

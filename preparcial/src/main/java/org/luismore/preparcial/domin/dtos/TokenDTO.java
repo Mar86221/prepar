@@ -7,6 +7,7 @@ import org.luismore.preparcial.domin.entities.Token;
 @Data
 @NoArgsConstructor
 public class TokenDTO {
+
     private String token;
 
     public TokenDTO(Token token){
